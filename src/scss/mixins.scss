@@ -1,0 +1,8 @@
+@mixin setColWidth($id, $width) {
+  th##{$id},
+  td[headers="#{$id}"] {
+    width: $width;
+    min-width: $width;
+    max-width: $width;
+  }
+}

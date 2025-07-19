@@ -1,29 +1,9 @@
-*,
-*:after,
-*:before {
-  box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-
-th,
-tr,
-td,
-td > div {
-  text-align: center;
-}
-
-td {
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 100%;
-}
+@use "./scss/mixins" as mixins;
 
 tbody {
   background-color: #f5f7fa;
-}
-tbody {
   & > tr {
-    border-top: 2px solid white;
+    box-shadow: 0 0 0 1px white;
     border-radius: 4px;
     height: 1px;
     & > td {
@@ -31,24 +11,70 @@ tbody {
     }
   }
   & > tr:first-child {
-    border-top: none !important;
+    box-shadow: none !important;
   }
 }
 
-th {
-  border: 1px solid #e8e8e8;
+td {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+  position: relative;
+  & > div.table-row > td {
+    &:not(:first-child)::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 25%;
+      height: 50%;
+      width: 1px;
+      background-color: #e8e8e8;
+    }
+  }
+}
+
+th,
+td {
+  vertical-align: middle;
 }
 
 table {
-  border-collapse: collapse;
-  // border-spacing: 8px;
+  border-collapse: separate;
   border-radius: 8px;
   border-style: hidden;
   box-shadow: 0 0 0 1px #e8e8e8;
+
+  @include mixins.setColWidth("size", 77px);
+  @include mixins.setColWidth("ssl", 77px);
+
+  @include mixins.setColWidth("container", 120px);
+  @include mixins.setColWidth("chasis", 105px);
+  @include mixins.setColWidth("gated-out", 90px);
+  @include mixins.setColWidth("gated-in", 90px);
+  @include mixins.setColWidth("return-terminal", 125px);
+  @include mixins.setColWidth("return-apt", 90px);
+  @include mixins.setColWidth("perdiem", 100px);
+
+  @include mixins.setColWidth("booking", 120px);
+  @include mixins.setColWidth("erd", 90px);
+  @include mixins.setColWidth("cutoff", 90px);
+  @include mixins.setColWidth("pickup-loc", 90px);
+  @include mixins.setColWidth("saving", 80px);
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0px 4px 4px 0px #e8e8e8;
 }
 
 tr.main-headers {
   th {
+    border-left: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
     padding: 15px 24px;
     text-align: left;
     font-size: 16px;
@@ -65,25 +91,34 @@ tr.sub-headers {
     font-weight: 400;
     line-height: 18px;
     color: #999999;
+    position: relative;
+    &:not(:first-child)::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 25%;
+      height: 50%;
+      width: 1px;
+      background-color: #e8e8e8;
+    }
   }
 }
 
 #cell_size_ssl {
   vertical-align: middle;
   div {
-    padding: 12px;
     background-color: white;
     width: calc(100% - 10px);
     height: calc(100% - 16px);
     margin: auto;
     display: flex;
-    justify-content: space-between;
-    gap: 8px;
+    justify-content: center;
     align-items: center;
     border: 1px solid #e8e8e8;
     border-radius: 4px;
     td {
       flex: 1;
+      padding: 6px;
     }
   }
 }
